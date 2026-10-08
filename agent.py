@@ -106,6 +106,13 @@ def run_agent(query: str, wardrobe: dict) -> dict:
         than a stack trace. The import is already at the top of this file.
     """
     session = new_session(query, wardrobe)
+    steps = 0
+
+    steps += 1
+    trace.check_iterations(steps)
+
+    #results = call_tool("search_listings",
+     #                   )
 
     # TODO: delete these two lines and build the loop.
     session["error"] = "The planning loop isn't built yet — see the TODO in agent.py."
