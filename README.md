@@ -57,26 +57,32 @@
      on, and if you don't decide it here you'll discover it as a crash in
      Milestone 5. -->
 
+     
+     
+
+
 ### `search_listings`
 
-- **What it does:**
-- **Inputs:** <!-- name and type each: `max_price` (float), not "a price" -->
-- **Returns:**
-- **When it has nothing:**
+- **What it does:** It searches the listings for items matching the description, and potentially the size and items with a price less than the maximum price. This tool does not call the AI model.
+- **Inputs:** <!-- name and type each: `max_price` (float), not "a price" --> This is a function that takes in a description (string), size (string), and maximum price (float).
+- **Returns:** Returns items that match the parameters. Size and items less than the max price aren't strictly required.
+- **When it has nothing:**  When this function has nothing to give it will return an empty list.
 
 ### `suggest_outfit`
 
-- **What it does:**
-- **Inputs:**
-- **Returns:**
-- **When it has nothing:**
+- **What it does:**      This function calls the model through generate() and suggests a one or two outfits.
+
+- **Inputs:** This function takes in a dictionary called new_item and a dictionary called wardrobe. The new_item is an item that the user is considering adding to their wardrobe. 
+- **Returns:** This function returns a string with outfit suggestions. 
+- **When it has nothing:**  If the wardrobe is empty, it will return general styling ideas for the new item.
+
 
 ### `create_fit_card`
 
-- **What it does:**
-- **Inputs:**
-- **Returns:**
-- **When it has nothing:**
+- **What it does:** This function calls the model and writes a short caption that a person would post about the outfit.
+- **Inputs:** It takes in 2 parameters: the outfit which is a string and new_item which is a dictionary. Outfit is a string from suggest_outfit().
+- **Returns:** This function returns a two to four sentence caption.
+- **When it has nothing:** If outfit is empty or whitespace it returns a descriptive message.
 
 ---
 
@@ -93,7 +99,7 @@
      The grader checks your code against what you claim here, so the file and
      function have to be real. -->
 
-**Branch rule:**
+**Branch rule:** If search_listings returns an empty list, put a message in the session and stop. Otherwise, take the first result and go to suggest_outfit
 
 **Where it lives:** `agent.py::run_agent`
 
