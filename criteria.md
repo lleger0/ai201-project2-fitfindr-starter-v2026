@@ -24,7 +24,7 @@ data earns credit; *"80% seemed reasonable"* does not.
 Given a query that matches at least one listing, the agent completes all three
 tool calls and returns a fit card — in at least 4 of 5 tries.
 
-**Why this target:**
+**Why this target:** This gives the agent some room for error though it is expected that it will be successful 80% of the time.
 <!-- Why 4 of 5 and not 5 of 5? Something about your search, probably —
      "my search is a plain keyword match and some phrasings will miss" is a
      real answer. -->
@@ -36,13 +36,15 @@ tool calls and returns a fit card — in at least 4 of 5 tries.
 Given a query that matches no listings, the agent stops before calling
 `suggest_outfit` and returns a message naming what to change — 5 of 5 tries.
 
-**Why this target:**
+**Why this target:**  This is a baseline that should work for all tries and prevents the agent from wasting resources. 
 <!-- Why is 5 of 5 reasonable here when criterion 1 isn't? What's different
      about this path? -->
 
 ---
 
-## 3. Something about state
+## 3. The item in the session matches the item all the tool recieved.
+
+All 3 of the tools should be working with the same item. Meaning the same item should be passed from search_listings to suggest_outfit to create_fit_card. - 5 of 5 tries.
 
 <!-- YOU WRITE THIS ONE.
 
@@ -56,13 +58,14 @@ Given a query that matches no listings, the agent stops before calling
 
 
 
-**Why this target:**
+**Why this target:** This is to ensure that the tool is using the same item it started with through it's path. This way the agent won't hallucinate a new item or pick another item up.
 
 
 
 ---
 
-## 4. Something about the fit card
+## 4. The fit card should contain a description of the item.
+The fit card should contain a description of the item in at least 3 of 5 tries
 
 <!-- YOU WRITE THIS ONE.
 
@@ -75,15 +78,17 @@ Given a query that matches no listings, the agent stops before calling
      sentence? A card longer than a caption anyone would post? Any of those can
      be turned into a number. -->
 
+    
 
 
-**Why this target:**
+**Why this target:** This is to ensure that the fit card is detailed and has an important component which is the description.
 
 
 
 ---
 
-## 5. Your choice
+## 5. Over-budget query returns nothing over the limit.
+When asked for clothes under a price the model shouldn't return anything above the limit. - 4 of 5 tries.
 
 <!-- YOU WRITE THIS ONE TOO.
 
@@ -94,7 +99,8 @@ Given a query that matches no listings, the agent stops before calling
 
 
 
-**Why this target:**
+
+**Why this target:** If the input asks for nothing over a certain amount of money, the model shouldn't return anything over that. This is to ensure that the model is following what the query is asking for. 
 
 
 
