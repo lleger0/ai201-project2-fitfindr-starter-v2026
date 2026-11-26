@@ -48,6 +48,7 @@ TEMPERATURE = 0.9
 # Evaluation runs turn this off automatically — five tries have to be five
 # real answers. `run_eval.py` handles that for you.
 CACHE_ENABLED = os.getenv("AI201_CACHE", "1") != "0"
+#CACHE_ENABLED = False # I used this to turn off the cache but now that I think about it, I probably could have just changed the 1 in the above line to 0
 
 
 # ─── The agent loop ──────────────────────────────────────────────────────────
