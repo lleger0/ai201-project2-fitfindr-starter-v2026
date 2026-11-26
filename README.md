@@ -41,6 +41,8 @@
 
 <!-- Three or four sentences: what a user asks for, and what they get back. -->
 
+This is fitfinder, an agent that can search listings, suggest outfits, and create post ideas for it. The user can input an item description and based on that search for listings that matches that item. After that the agent will give two outfit ideas based on the users existing wardbrobe. The agent can then share a sample post caption, fully giving the user a full view of what it's like to have that listing item.
+
 
 
 ---
@@ -56,10 +58,6 @@
      The empty case isn't optional either — it's the thing your loop branches
      on, and if you don't decide it here you'll discover it as a crash in
      Milestone 5. -->
-
-     
-     
-
 
 ### `search_listings`
 
@@ -108,9 +106,10 @@
 
 **Where it lives:** `agent.py::run_agent`
 
-**How the query is parsed:** <!-- regex, string splitting, or asking the model — say which -->
+**How the query is parsed:** <!-- regex, string splitting, or asking the model — say which --> The query is parsed into a dictionary that takes the description, size, and max_price from the query.  
 
 **What moves through the session:** <!-- which fields, in what order -->
+A list of items that match the query. Then one item is chosen. That item then moves through the rest of the session. The item has fields such as title, price, and platform. 
 
 ---
 
@@ -124,9 +123,42 @@
 **One full query**
 
 ```
-$ python app.py ask '...'
+ex: $ python app.py ask '...'
+$ python app.py ask 'vintage graphic tee under $30'
 
 ```
+Result:
+
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  dict with keys: description, size, max_price
+      out: 8 items: Graphic Tee — 2003 Tour Bootleg Style, Y2K Baby Tee — Butterfly Print, Vintage Graphic Hoodie — Faded Black … +5 more
+      →    8 match(es)
+[3] select_item
+      out: Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+[4] suggest_outfit
+      in:  Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      out: Outfit 1: Pair the Graphic Tee — 2003 Tour Bootleg Style with your Baggy straight-leg jeans, dark wash, and fi…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      out: Score this 2003 tour bootleg style tee on depop for just $24. It has the ultimate faded grunge look that goes …
+
+  Found:    Graphic Tee — 2003 Tour Bootleg Style — $24.0 on depop
+
+  Outfit:   Outfit 1:
+Pair the Graphic Tee — 2003 Tour Bootleg Style with your Baggy straight-leg jeans, dark wash, and finish with your Black combat boots and Black crossbody bag. 
+Why it works: This leans into an effortless, authentic 90s grunge look. The dark wash denim anchors the loud graphic, and the combat boots add that classic edgy finish.
+
+Outfit 2:
+Layer your Vintage black denim jacket over the Graphic Tee — 2003 Tour Bootleg Style, paired with your Wide-leg khaki trousers, and step into your Chunky white sneakers.
+Why it works: It balances the dark, edgy streetwear vibe of the tee with the clean, relaxed earth tones of the khakis, while the cropped jacket pulls in your waist.
+
+  Fit card: Score this 2003 tour bootleg style tee on depop for just $24. It has the ultimate faded grunge look that goes with everything in my closet. I’m living in this shirt all fall.
+
+0 model calls this session, 2 served from cache
 
 **The three tools, tested one at a time**
 
@@ -175,17 +207,26 @@ Finally caved and grabbed these vintage Levi's 501s on Depop for $38 and I am ne
      "I gave Claude my search_listings spec. It returned None on no match
      instead of an empty list, so I changed it" is the level we want. -->
 
-**Moment 1** I used AI to help me write the code for the suggest_outfit tool
+**Moment 1** 
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Assistance in writing the code for the suggest_outfit tool
+- *What came back:* suggest_outfit() including the steps listed in the instructions
+- *What I changed:* I implemented this as part of my code ensuring that it worked and passed all tests.
 
-**Moment 2** I used AI to help me write the code for the create_fit_card tool. 
+**Moment 2** 
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Assistance in writing the code for the create_fit_card tool
+- *What came back:* create_fit_card() including the steps listed in the instructions
+- *What I changed:* I implemented this as part of my code ensuring that it worked and passed all tests.
+
+
+**Moment 3**
+
+
+- *What I asked for:*  I asked the AI to ensure that all the requirements for Milestone 5 were met.
+- *What came back:* The AI actually pointed out that my search_lisitngs tool was not sorting the listings properly.
+- *What I changed:*  Using it's feedback, I was able to manually fix the code causing the issue. 
+
 
 <!-- ═══════════════════════ UNIT 4 — THE TEST ═══════════════════════
 
