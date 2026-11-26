@@ -140,12 +140,22 @@ def search_listings(
 
     result = []
 
+    # attempt at sorting before
+    # for l in listings:
+    #     if len(result) == config.SEARCH_RESULT_LIMIT:
+    #         break
+    #     for k,v in sorted_desc.items():
+    #         #result.append(l[k])
+    #         if l["id"] == k:
+    #             result.append(l)
+    #         if len(result) == config.SEARCH_RESULT_LIMIT:
+    #             break
 
-    for l in listings:
+    # attempt at sorting after
+    for k,v in sorted_desc.items():
         if len(result) == config.SEARCH_RESULT_LIMIT:
             break
-        for k,v in sorted_desc.items():
-            #result.append(l[k])
+        for l in listings:
             if l["id"] == k:
                 result.append(l)
             if len(result) == config.SEARCH_RESULT_LIMIT:

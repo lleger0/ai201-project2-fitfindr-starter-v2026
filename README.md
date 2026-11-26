@@ -99,7 +99,12 @@
      The grader checks your code against what you claim here, so the file and
      function have to be real. -->
 
-**Branch rule:** If search_listings returns an empty list, put a message in the session and stop. Otherwise, take the first result and go to suggest_outfit
+<!-- **Branch rule:** If search_listings returns an empty list, put a message in the session and stop. Otherwise, take the first result and go to suggest_outfit -->
+
+**Branch rule:** If search_listings returns an empty list, put a message in
+        session["error"] naming what the user could change, and return the
+        session without calling suggest_outfit. Otherwise take the first
+        result, put it in session["selected_item"], and continue.
 
 **Where it lives:** `agent.py::run_agent`
 
