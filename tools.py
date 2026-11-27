@@ -325,7 +325,7 @@ def create_fit_card(outfit: str, new_item: dict) -> str:
         f"{item_desc}\n\n"
         f"How I'm styling it:\n{outfit.strip()}\n\n"
         "Write a caption for posting this fit. Mention the item, the price, and "
-        "the platform exactly once each, and be specific about the vibe."
+        "the platform exactly once each, and be specific about the vibe. Mention the item description: {new_item['description']}"
     )
 
     # Step 3 - call the model and return its response, never an empty string
