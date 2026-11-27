@@ -310,13 +310,55 @@ that produced it:
 **Happy path**
 
 ```
+[1] parse_query
+      in:  red shoes under $200
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': 'red shoes', 'size': None, 'max_price': 200.0}
+      out: 1 items: Oversized College Crewneck — Faded Red
+      →    1 match(es)
+[3] select_item
+      out: Oversized College Crewneck — Faded Red ($21.0, thredUp)
+[4] suggest_outfit
+      in:  Oversized College Crewneck — Faded Red ($21.0, thredUp)
+      out: Outfit 1: The Classic Streetwear Vibe Pair the Oversized College Crewneck — Faded Red with your Baggy straight…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Oversized College Crewneck — Faded Red ($21.0, thredUp)
+      out: Score this faded red college crewneck on thredUp for just $21 and I am never taking it off. Threw it on with d…
 
+  Found:    Oversized College Crewneck — Faded Red — $21.0 on thredUp
+
+  Outfit:   Outfit 1: The Classic Streetwear Vibe
+Pair the Oversized College Crewneck — Faded Red with your Baggy straight-leg jeans, dark wash, and finish it with your Chunky white sneakers and Black crossbody bag. Let the white ribbed tank top peekout just a bit at the neckline. 
+Why it works: The faded red pops against the deep indigo denim, and the chunky sneakers balance out the relaxed, oversized silhouette of the sweater for an effortless, sporty look.
+
+Outfit 2: The Casual Contrast Look
+Wear the Oversized College Crewneck — Faded Red tucked into your Wide-leg khaki trousers, accented with the Brown leather belt, and step into your Black combat boots. Throw on the Vintage black denim jacket over top if you need an extra layer.
+Why it works: Pairing the athletic red crewneck with crisp khaki trousers creates a cool high-low mix, while the brown belt and black boots add grounding earth tones and a touch of edge.
+
+  Fit card: Score this faded red college crewneck on thredUp for just $21 and I am never taking it off. Threw it on with dark wash straight jeans and chunky sneakers for an effortless streetwear vibe.It has that perfectly worn-in look that makes it feel like an actual vintage thrift find.
+
+2 model calls this session, 717 prompt + 262 output tokens
 ```
 
 **Empty search**
 
 ```
+[1] parse_query
+      in:  designer ball gown under $60 size XXS
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ball gown', 'size': 'XXS', 'max_price': 60.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
 
+  Nothing in the listings matched description 'designer ball gown', size XXS, under $60.
+Things to change: try broader words — 'jacket' finds more than 'cropped corduroy jacket'; drop the size, or try a neighbouring one; raise the price ceiling above $60.
+
+0 model calls this session
 ```
 
 **On the MCP move:** <!-- what changed in your code, and whether anything
