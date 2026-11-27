@@ -246,18 +246,175 @@ Finally caved and grabbed these vintage Levi's 501s on Depop for $38 and I am ne
      `python run_eval.py --label before` runs everything and writes the table
      into results/. Paste it here and fill in the verdicts. -->
 
-| Criterion | Target | Try 1 | Try 2 | Try 3 | Try 4 | Try 5 | Verdict |
+<!-- | Criterion | Target | Try 1 | Try 2 | Try 3 | Try 4 | Try 5 | Verdict |
 |---|---|---|---|---|---|---|---|
 | 1.  |  |  |  |  |  |  |  |
 | 2.  |  |  |  |  |  |  |  |
 | 3.  |  |  |  |  |  |  |  |
 | 4.  |  |  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |  |  |
+| 5.  |  |  |  |  |  |  |  | -->
+
+| Criterion | Target | Try 1 | Try 2 | Try 3 | Try 4 | Try 5 | Verdict |
+|---|---|---|---|---|---|---|---|
+| 1. Full three-tool run returns a fit card | 4 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 2. Empty search stops before tool 2 | 5 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5)|
+| 3. Item in session matches item passed on | 5 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5)|
+| 4. Fit card mentions the item's description | 3 of 5 | FAIL | PASS | PASS | PASS | PASS | MET (4/5) |
+| 5. Over-budget query returns nothing over the limit | 4 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5)  |
 
 **Real output from one try**, pasted as text, naming the file and function
 that produced it:
 
+file: results\run_2026-11-26_2033_before.md
+
 ```
+Cache is OFF for this run — that's deliberate.
+
+matching query completes  (example wardrobe)
+  query: vintage graphic tee under $30
+[1] parse_query
+      in:  vintage graphic tee under $30
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': 'vintage graphic tee', 'size': None, 'max_price': 30.0}
+      out: 8 items: Graphic Tee — 2003 Tour Bootleg Style, Y2K Baby Tee — Butterfly Print, Vintage Graphic Hoodie — Faded Black … +5 more
+      →    8 match(es)
+[3] select_item
+      out: Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+[4] suggest_outfit
+      in:  Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      out: Outfit 1: Pair your new graphic tee with the baggy straight-leg jeans, black combat boots, and black crossbody…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      out: Scored this bootleg 2003 tour graphic tee on depop for $24 and I'm obsessed. Threw it on with some baggy denim…
+  try 1: completed — fit card 217 chars
+
+
+impossible query stops early  (example wardrobe)
+  query: designer ballgown size XXS under $5
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+  try 1: stopped early — Nothing in the listings matched description 'designer ballgo
+[1] parse_query
+      in:  designer ballgown size XXS under $5
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': 'designer ballgown', 'size': 'XXS', 'max_price': 5.0}
+      out: [] (empty)
+      →    0 match(es)
+[3] branch
+      →    search returned []: stopping before suggest_outfit
+ 
+empty wardrobe  (empty wardrobe)
+  query: denim jacket under $50
+[1] parse_query
+      in:  denim jacket under $50
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+      out: 5 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +2 more
+      →    5 match(es)
+[3] select_item
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+[4] suggest_outfit
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Outfit 1: Throw that cropped Wrangler jacket over a simple white crewneck tee, high-waisted black straight-leg…
+      →    0 wardrobe item(s)
+[5] create_fit_card
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Scored this cropped Wrangler denim jacket on Poshmark for $42 and it has the absolute best vintage streetwear …
+  try 1: completed — fit card 320 chars
+[1] parse_query
+      in:  denim jacket under $50
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': 'denim jacket', 'size': None, 'max_price': 50.0}
+      out: 5 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +2 more
+      →    5 match(es)
+[3] select_item
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+[4] suggest_outfit
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Outfit 1: Throw that cropped Wrangler jacket over a simple white crewneck tee, high-waisted black straight-leg…
+      →    0 wardrobe item(s)
+[5] create_fit_card
+      in:  Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      out: Found this cropped Wrangler denim jacket on Poshmark for forty-two dollars and honestly haven't taken it off s…
+ 
+session consistency  (example wardrobe)
+  query: 90s track jacket in size M
+[1] parse_query
+      in:  90s track jacket in size M
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': '90s track jacket in', 'size': 'M', 'max_price': None}
+      out: 4 items: 90s Track Jacket — Navy/White Stripe, 90s Leather Bomber — Black, 90s Silk Slip Dress — Floral, Midi Length … +1 more
+      →    4 match(es)
+[3] select_item
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+[4] suggest_outfit
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Outfit 1: Pair the 90s Track Jacket — Navy/White Stripe with your white ribbed tank top, baggy straight-leg je…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      out: Scored this vintage Champion track jacket on Poshmark for just $45 and I'm obsessed. It's giving major 90s str…
+  try 1: completed — fit card 218 chars
+
+
+fit card with descriptions  (example wardrobe)
+  query: platform sneakers size 8
+[1] parse_query
+      in:  platform sneakers size 8
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': 'platform sneakers size 8', 'size': None, 'max_price': None}
+      out: 5 items: Platform Sneakers — White Chunky Sole, Platform Mary Janes — Black Patent, Low-Top Canvas Sneakers — Off-White … +2 more
+      →    5 match(es)
+[3] select_item
+      out: Platform Sneakers — White Chunky Sole ($48.0, poshmark)
+  [rate limit] 15 requests used this minute. Waiting 39s. This is normal.
+[4] suggest_outfit
+      in:  Platform Sneakers — White Chunky Sole ($48.0, poshmark)
+      out: **Outfit 1: The Off-Duty Streetwear Look** Pair your new Platform Sneakers with the white ribbed tank top, bag…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  Platform Sneakers — White Chunky Sole ($48.0, poshmark)
+      out: Found these chunky platform sneakers on Poshmark for $48 and I am officially in my 90s streetwear era. They ad…
+  try 1: completed — fit card 256 chars
+
+
+max price test  (example wardrobe)
+  query: silk slip dress in midi length under $40
+[1] parse_query
+      in:  silk slip dress in midi length under $40
+      out: dict with keys: description, size, max_price
+[2] search_listings (via MCP)
+      in:  {'description': 'silk slip dress in midi length', 'size': None, 'max_price': 40.0}
+      out: 5 items: 90s Silk Slip Dress — Floral, Midi Length, Y2K Baby Tee — Butterfly Print, High-Waisted Denim Shorts — Cutoff … +2 more
+      →    5 match(es)
+[3] select_item
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+  [rate limit] 15 requests used this minute. Waiting 3s. This is normal.
+[4] suggest_outfit
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Outfit 1: Layer the 90s Silk Slip Dress over your white ribbed tank top and ground the feminine floral pattern…
+      →    10 wardrobe item(s)
+[5] create_fit_card
+      in:  90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      out: Scored this 90s silk slip dress on Depop for just $30 and I am so obsessed with the floral print. It's giving …
+  try 1: completed — fit card 288 chars
+
+Wrote results\run_2026-11-26_2033_before.md
+50 model calls this session, 15571 prompt + 5378 output tokens
 
 ```
 

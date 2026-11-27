@@ -35,6 +35,30 @@ SCENARIOS = [
         "wardrobe": "empty",
         "criterion": None,
     },
+    {
+        # same item throughout the sessions
+        "name": "session consistency",
+        "query": "90s track jacket in size M",
+        "wardrobe":"example",
+        "criterion":"3"
+    },
+    {
+        # fit card should contain item descriptions
+        "name": "fit card with descriptions",
+        "query": "platform sneakers size 8",
+        "wardrobe":"example",
+        "criterion":"4"
+        
+
+    },
+    {
+        # The model should not return any clothes above the price maximum price
+        "name": "max price test",
+        "query": "silk slip dress in midi length under $40",
+        "wardrobe":"example",
+        "criterion":"5"
+    },
+
     # TODO: add what your criteria 3, 4 and 5 need.
     #
     # Set "criterion" to the number in criteria.md that the scenario tests.
