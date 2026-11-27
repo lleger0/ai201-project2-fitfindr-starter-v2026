@@ -454,6 +454,8 @@ Wrote results\run_2026-11-26_2033_before.md
 
 I have met all of my criteria. The only criteria that failed in one of the 5 tries was criteria 4. The item description was "White chunky platform sneakers. Very late 90s / early 2000s energy. Velcro straps. True to size. Some sole yellowing." In testing I decided to focus on making sure the key words white, chunky platform sneakes, 90s, were in the description. One of the fit cards failed to mention that the sneakers were white.
 
+This issue could be caused by an improper prompt. I should specify in the prompt to use the item description in the fitcard.
+
 
 ---
 
