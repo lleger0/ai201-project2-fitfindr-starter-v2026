@@ -438,16 +438,21 @@ Wrote results\run_2026-11-26_2033_before.md
      Look for a pattern. Three misses on the same tool is one problem, not
      three. -->
 
+     In criterion 4, one of the tries failed and did not mention that the sneakers were white. 
+
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Full three-tool run returns a fit card | 4 of 5 | MET | checked each try and saw that at least 4 of them had a fit card |
+| 2 | Empty search stops before tool 2 | 5 of 5 | MET | checked each try with an input not in the listings. The trace showed that none of the tries went past tool 2 |
+| 3 | Item in session matches item passed on | 5 of 5 | MET | using the trace, it was possible to see that the session item stayed the same for each of the tries |
+| 4 | Fit card mentions the item's description | 3 of 5 | MET | read through the fitcard and decipher if it included key words from the item description |
+| 5 | Over-budget query returns nothing over the limit | 4 of 5 | MET | checked the price of the item returned |
+
+
 
 **Diagnoses**
 
+I have met all of my criteria. The only criteria that failed in one of the 5 tries was criteria 4. The item description was "White chunky platform sneakers. Very late 90s / early 2000s energy. Velcro straps. True to size. Some sole yellowing." In testing I decided to focus on making sure the key words white, chunky platform sneakes, 90s, were in the description. One of the fit cards failed to mention that the sneakers were white.
 
 
 ---
